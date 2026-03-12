@@ -17,7 +17,7 @@ class IndexerService:
         self.vector_store = MongoDBAtlasVectorSearch(
             mongodb_client=self.mongo_client,
             db_name="recruiter_db",
-            collection_name="cv_embeddings
+            collection_name="cv_embeddings",
             index_name="vector_index"
         )
         self.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=50)
