@@ -9,6 +9,7 @@ from llama_index.core import (
 )
 from llama_index.core.node_parser import SentenceSplitter
 from app.core.config import Config
+from datetime import datetime
 
 class IndexerService:
     def __init__(self):
@@ -52,7 +53,25 @@ class IndexerService:
         """
         # Melakukan 'distinct' pada field metadata.file_name
         collection = self.mongo_client[self.db_name][self.collection_name]
-        return collection.distinct("metadata.file_name")
+
+        pipeline = [
+            {
+                "$group": {
+                    "_id": "$metadata.file_name",
+                    "upload_date": {"$first": "$metadata.upload_date"},
+                    "status": {"$first": "$metadata.status"}
+                }
+            },
+            {
+                "$project": {
+                    "_id": 0,
+                    "file_name": "$_id",
+                    "upload_date": 1,
+                    "status": 1
+                }
+            }
+        ]
+        return list(collection.aggregate(pipeline))
 
     def delete_by_filename(self, filename: str):
         """
@@ -61,3 +80,23 @@ class IndexerService:
         collection = self.mongo_client[self.db_name][self.collection_name]
         result = collection.delete_many({"metadata.file_name": filename})
         return result.deleted_count
+
+    def save_rank_history(self, job_title: str, jd_text: str, results: List[dict]):
+        """
+        Menyimpan hasil ranking ke koleksi history terpisah.
+        """
+        history_coll = self.mongo_client[self.db_name]["rank_history"]
+        log_entry = {
+            "job_title": job_title,
+            "job_description": jd_text,
+            "results": results,
+            "created_at": datetime.utcnow()
+        }
+        return history_coll.insert_one(log_entry).inserted_id
+
+    def get_rank_history(self) -> List[dict]:
+        """
+        Mengambil semua history ranking dari database (terbaru dulu).
+        """
+        history_coll = self.mongo_client[self.db_name]["rank_history"]
+        return list(history_coll.find().sort("created_at", -1))

@@ -15,7 +15,7 @@ class Config:
     LLAMA_CLOUD_API_KEY = os.getenv("LLAMA_CLOUD_API_KEY")
     
     # LLM Settings
-    MODEL_NAME = "gemini-2.5-flash-lite"
+    MODEL_NAME = "gemini-3.1-flash-lite-preview"
     EMBED_MODEL_NAME = "gemini-embedding-001"
     
     @staticmethod

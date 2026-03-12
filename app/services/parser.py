@@ -1,5 +1,6 @@
 import os
 import shutil
+from datetime import datetime
 from typing import List, Union
 from llama_parse import LlamaParse
 from llama_index.core import Document
@@ -41,8 +42,11 @@ class ParserService:
         for path in valid_paths:
             # Parse satu file saja per panggilan agar kita yakin metadatanya benar
             docs = await self.parser.aload_data(path)
+            current_time = datetime.now().isoformat()
             for doc in docs:
                 doc.metadata["file_name"] = os.path.basename(path)
+                doc.metadata["upload_date"] = current_time
+                doc.metadata["status"] = "indexed"
                 all_documents.append(doc)
                 
         return all_documents

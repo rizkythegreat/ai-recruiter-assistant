@@ -1,4 +1,6 @@
-from fastapi import APIRouter, UploadFile, File, HTTPException, Form
+import os
+import logging
+from fastapi import APIRouter, UploadFile, File, HTTPException, Form, BackgroundTasks
 from typing import List, Dict, Any
 import json
 from llama_index.core import Settings
@@ -13,38 +15,33 @@ parser_service = ParserService()
 indexer_service = IndexerService()
 
 @router.post("/upload-cv")
-async def upload_cv(files: List[UploadFile] = File(...)):
+async def upload_cv(background_tasks: BackgroundTasks, files: List[UploadFile] = File(...)):
     """
     Endpoint: /upload-cv (POST)
     Accepts PDF/Docx files, parses them, and indexes their content.
     """
-    try:
-        saved_paths = []
-        for file in files:
-            content = await file.read()
-            path = parser_service.save_temp_file(content, file.filename)
-            saved_paths.append(path)
-        
-        documents = await parser_service.parse_docs(saved_paths)
-        if not documents:
-            raise HTTPException(status_code=400, detail="Failed to parse documents.")
-            
-        await indexer_service.build_indices(documents)
-        
-        # Reload index into RAM immediately
-        load_index_into_memory()
+    temp_paths = []
+    for file in files:
+        content = await file.read()
+        path = parser_service.save_temp_file(content, file.filename)
+        temp_paths.append(path)
+    
+    # 2. Jalankan proses berat di background
+    background_tasks.add_task(process_and_index_cvs, temp_paths)
+    
+    # 3. Langsung beri respon ke frontend agar tidak timeout
+    return {"message": "Files received. Indexing is processing in the background."}
 
-        for path in saved_paths:
-            if os.path.exists(path):
-                os.remove(path)
-        
-        return {"message": f"Successfully indexed {len(files)} CVs."}
-        
-    except Exception as e:
-        for path in saved_paths:
-            if os.path.exists(path):
-                os.remove(path)
-        raise HTTPException(status_code=500, detail=str(e))
+async def process_and_index_cvs(file_paths: List[str]):
+        try:
+            documents = await parser_service.parse_docs(file_paths)
+            if documents:
+                await indexer_service.build_indices(documents)
+                load_index_into_memory()
+        finally:
+            for path in file_paths:
+                if os.path.exists(path):
+                    os.remove(path)
 
 @router.post("/analyze")
 async def analyze_cv(job_description: str = Form(...)):
@@ -90,7 +87,10 @@ async def analyze_cv(job_description: str = Form(...)):
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
 @router.post("/rank-candidates")
-async def rank_candidates(job_description: str = Form(...)):
+async def rank_candidates(
+    job_title: str = Form(...),
+    job_description: str = Form(...)
+):
     """
     Endpoint: /rank-candidates (POST)
     Uses Hybrid RRF + Query Fusion + Reranking to rank all uploaded candidates.
@@ -153,11 +153,32 @@ async def rank_candidates(job_description: str = Form(...)):
             ranking.sort(key=lambda x: x.get("score", 0), reverse=True)
             for i, item in enumerate(ranking):
                 item["rank"] = i + 1
+
+            indexer_service.save_rank_history(
+                job_title=job_title,
+                jd_text=job_description,
+                results=ranking
+            )
         
-        return {"ranking": ranking}
+        return {"job_title": job_title, "ranking": ranking}
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ranking failed: {str(e)}")
+
+@router.get('/get-history')
+async def get_history():
+    """
+    Endpoint: /get-history (GET)
+    Mengambil daftar history ranking dari database.
+    """
+    try:
+        history = indexer_service.get_rank_history()
+        # Convert ObjectId ke string agar bisa di-serialize ke JSON
+        for item in history:
+            item["_id"] = str(item["_id"])
+        return {"history": history}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/list-cv")
 async def list_cv():
