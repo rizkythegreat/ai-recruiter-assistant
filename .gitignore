@@ -1,0 +1,36 @@
+# 1. Environment Variables & Secrets (Sangat Penting!)
+.env
+auth.json
+api_key.txt
+
+# 2. Python Virtual Environment
+venv/
+.venv/
+env/
+active_env/
+build/
+dist/
+
+# 3. Python Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# 4. Data & Storage (Kini tersimpan di Cloud/Lokal untuk sementara)
+storage/
+data/uploads/*
+!data/uploads/.gitkeep
+temp/
+
+# 5. OS Specific Files
+.DS_Store
+Thumbs.db
+
+# 6. IDE Specific Files
+.vscode/
+.idea/
+*.swp
+*.swo
