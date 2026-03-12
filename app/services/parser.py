@@ -1,5 +1,4 @@
 import os
-import shutil
 from datetime import datetime
 from typing import List, Union
 from llama_parse import LlamaParse

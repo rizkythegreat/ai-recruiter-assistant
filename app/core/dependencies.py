@@ -1,4 +1,3 @@
-import os
 from app.services.indexer import IndexerService
 
 # Global variable agar index tetap di RAM selama aplikasi berjalan

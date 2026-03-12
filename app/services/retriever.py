@@ -1,7 +1,6 @@
 from typing import List, Dict
 from llama_index.core import VectorStoreIndex, QueryBundle
 from llama_index.core.retrievers import (
-    BaseRetriever,
     VectorIndexRetriever
 )
 from llama_index.retrievers.bm25 import BM25Retriever

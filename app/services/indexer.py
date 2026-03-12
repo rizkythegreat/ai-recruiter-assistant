@@ -8,7 +8,6 @@ from llama_index.core import (
     Document
 )
 from llama_index.core.node_parser import SentenceSplitter
-from app.core.config import Config
 from datetime import datetime
 
 class IndexerService:

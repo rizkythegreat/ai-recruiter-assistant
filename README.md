@@ -90,5 +90,14 @@ Accepts a `job_description` (Form Data). Analyzes context from the uploaded resu
 ### `POST /api/v1/rank-candidates`
 Accepts a `job_description` (Form Data). Performs Hybrid Search + Query Fusion + Reranking to return an ordered list of candidates compared against each other.
 
+### `GET /api/v1/get-history`
+Get all history rank-candidates from database
+
+### `GET /api/v1/list-cv`
+Get lists all of cv name from the database.
+
+### `DELETE /api/v1/delete-cv/{filename}`
+Delete cv based on filename from database
+
 ---
 Built with ❤️ for Modern HR Teams.

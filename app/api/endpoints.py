@@ -1,8 +1,6 @@
 import os
-import logging
 from fastapi import APIRouter, UploadFile, File, HTTPException, Form, BackgroundTasks
-from typing import List, Dict, Any
-import json
+from typing import List
 from llama_index.core import Settings
 from app.services.parser import ParserService
 from app.services.indexer import IndexerService
