@@ -33,10 +33,17 @@ async def upload_cv(files: List[UploadFile] = File(...)):
         
         # Reload index into RAM immediately
         load_index_into_memory()
+
+        for path in saved_paths:
+            if os.path.exists(path):
+                os.remove(path)
         
         return {"message": f"Successfully indexed {len(files)} CVs."}
         
     except Exception as e:
+        for path in saved_paths:
+            if os.path.exists(path):
+                os.remove(path)
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.post("/analyze")

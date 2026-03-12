@@ -21,7 +21,11 @@ class RetrieverService:
         
         # Initialize BM25 on the nodes of the vector index
         nodes = list(self.vector_index.docstore.docs.values())
-        self.bm25_retriever = BM25Retriever.from_defaults(nodes=nodes, similarity_top_k=40)
+        if nodes:
+            self.bm25_retriever = BM25Retriever.from_defaults(nodes=nodes, similarity_top_k=40)
+        else:
+            # Fallback if no nodes are available yet
+            self.bm25_retriever = None
         
         # Cross-Encoder Reranker for objective "jury" scoring
         self.reranker = SentenceTransformerRerank(
@@ -60,10 +64,13 @@ class RetrieverService:
         Executes a hybrid retrieval combining Vector and BM25 results using RRF.
         """
         vector_results = await self.vector_retriever.aretrieve(query_str)
-        bm25_results = self.bm25_retriever.retrieve(query_str)
         
-        # Apply Reciprocal Rank Fusion
-        return self._reciprocal_rank_fusion([vector_results, bm25_results])
+        if self.bm25_retriever:
+            bm25_results = self.bm25_retriever.retrieve(query_str)
+            # Apply Reciprocal Rank Fusion
+            return self._reciprocal_rank_fusion([vector_results, bm25_results])
+        
+        return vector_results
 
     async def advanced_retrieve(self, query_str: str) -> List[NodeWithScore]:
         """
