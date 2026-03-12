@@ -158,3 +158,33 @@ async def rank_candidates(job_description: str = Form(...)):
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ranking failed: {str(e)}")
+
+@router.get("/list-cv")
+async def list_cv():
+    """
+    Endpoint: /list-cv (GET)
+    Mengambil daftar semua nama file CV yang sudah ada di database.
+    """
+    try:
+        files = indexer_service.list_indexed_files()
+        return {"files": files, "total": len(files)}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.delete("/delete-cv/{filename}")
+async def delete_cv(filename: str):
+    """
+    Endpoint: /delete-cv/{filename} (DELETE)
+    Menghapus data CV tertentu dari database.
+    """
+    try:
+        count = indexer_service.delete_by_filename(filename)
+        if count == 0:
+            raise HTTPException(status_code=404, detail="File not found in database.")
+        
+        # Reload RAM agar index terbaru sinkron
+        load_index_into_memory()
+        
+        return {"message": f"Successfully deleted {filename} and removed {count} chunks."}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

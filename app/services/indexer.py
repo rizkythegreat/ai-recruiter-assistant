@@ -13,11 +13,14 @@ from app.core.config import Config
 class IndexerService:
     def __init__(self):
         # 1. Inisialisasi Koneksi MongoDB
+        self.db_name = "recruiter_db"
+        self.collection_name = "cv_embeddings"
+
         self.mongo_client = MongoClient(os.getenv("MONGO_URI"))
         self.vector_store = MongoDBAtlasVectorSearch(
             mongodb_client=self.mongo_client,
-            db_name="recruiter_db",
-            collection_name="cv_embeddings",
+            db_name=self.db_name,
+            collection_name=self.collection_name,
             index_name="vector_index"
         )
         self.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=50)
@@ -42,3 +45,19 @@ class IndexerService:
         Gunakan Vector Store langsung dari database Cloud.
         """
         return VectorStoreIndex.from_vector_store(vector_store=self.vector_store)
+    
+    def list_indexed_files(self) -> List[str]:
+        """
+        Mengambil daftar nama file unik yang sudah terindeks di MongoDB.
+        """
+        # Melakukan 'distinct' pada field metadata.file_name
+        collection = self.mongo_client[self.db_name][self.collection_name]
+        return collection.distinct("metadata.file_name")
+
+    def delete_by_filename(self, filename: str):
+        """
+        Menghapus semua chunks dokumen yang memiliki file_name tertentu.
+        """
+        collection = self.mongo_client[self.db_name][self.collection_name]
+        result = collection.delete_many({"metadata.file_name": filename})
+        return result.deleted_count
