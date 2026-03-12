@@ -126,14 +126,22 @@ async def rank_candidates(job_description: str = Form(...)):
         Candidates Data:
         {candidates_context}
 
-        Task: Rank candidates by suitability. 
-        Output REQUIREMENT: Return ONLY a valid JSON list. No preamble. 
-        Format:
+        Task: Rank candidates by suitability and extract metadata. 
+        Output REQUIREMENT: Return ONLY a valid JSON list of objects. No preamble. 
+        Format per candidate:
         [
           {{
             "candidate": "filename.pdf",
             "score": 0-100,
-            "reason": "Brief objective comparison"
+            "metadata": {{
+                "years_of_experience": number,
+                "top_skills": ["skill1", "skill2"],
+                "location": "string"
+            }},
+            "analysis": {{
+                "reason": "Brief comparison",
+                "suitability_tag": "Highly Recommended/Medium Match/Low Match"
+            }}
           }}
         ]
         """
