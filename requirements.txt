@@ -20,3 +20,4 @@ python-magic
 
 pymongo
 llama-index-vector-stores-mongodb
+llama-index-retrievers-bm25
