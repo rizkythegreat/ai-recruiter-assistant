@@ -1,0 +1,22 @@
+# Web Framework
+fastapi
+uvicorn
+python-multipart
+python-dotenv
+
+# LlamaIndex Core
+llama-index
+llama-index-llms-gemini
+llama-index-embeddings-gemini
+llama-index-readers-file
+
+# Advanced Parsing & Retrieval
+llama-parse
+rank-bm25
+
+# Utils
+pydantic
+python-magic
+
+pymongo
+llama-index-vector-stores-mongodb
