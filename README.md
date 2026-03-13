@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 title: Ai Cv Assistant
 emoji: 📊
@@ -8,8 +7,6 @@ sdk: docker
 pinned: false
 ---
 
-Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference
-=======
 # AI Recruiter Assistant (Advanced RAG System)
 
 An intelligent CV Summarizer and Ranking system built with **FastAPI**, **LlamaIndex**, and **Google Gemini 1.5 Flash**. This system uses an Advanced RAG (Retrieval-Augmented Generation) pipeline to parse complex resumes, store them in **MongoDB Atlas Vector Search**, and provide intelligent candidate matching based on Job Descriptions.
@@ -113,4 +110,3 @@ Delete cv based on filename from database
 
 ---
 Built with ❤️ for Modern HR Teams.
->>>>>>> 80cba9b08908f552f541c8d70d62ac92d740470f
