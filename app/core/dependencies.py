@@ -5,7 +5,7 @@ _global_vector_index = None
 
 def load_index_into_memory():
     """
-    Memuat koneksi index MongoDB ke dalam memori aplikasi.
+    Create MongoDB connection index to internal memory apps.
     """
     global _global_vector_index
     try:
