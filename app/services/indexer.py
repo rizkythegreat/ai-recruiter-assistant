@@ -16,7 +16,7 @@ class IndexerService:
         self.db_name = "recruiter_db"
         self.collection_name = "cv_embeddings"
 
-        self.mongo_client = MongoClient(os.getenv("MONGO_URI"))
+        self.mongo_client = MongoClient(os.getenv("MONGODB_URI"))
         self.vector_store = MongoDBAtlasVectorSearch(
             mongodb_client=self.mongo_client,
             db_name=self.db_name,
