@@ -28,6 +28,7 @@ temp/
 # 5. OS Specific Files
 .DS_Store
 Thumbs.db
+project-req.md
 
 # 6. IDE Specific Files
 .vscode/

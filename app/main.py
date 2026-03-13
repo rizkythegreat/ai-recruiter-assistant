@@ -17,7 +17,7 @@ app = FastAPI(
 # Load indices into RAM at startup for better performance
 @app.on_event("startup")
 async def startup_event():
-    print("🚀 Initializing Indices into memory...")
+    print("Initializing Indices into memory...")
     load_index_into_memory()
 
 # CORS Middleware for potential frontend integration
