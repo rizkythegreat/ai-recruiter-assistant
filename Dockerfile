@@ -1,9 +1,5 @@
 # Use an official Python runtime as a parent image
-<<<<<<< HEAD
 FROM python:3.11-slim
-=======
-FROM python:3.10-slim
->>>>>>> 80cba9b08908f552f541c8d70d62ac92d740470f
 
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1
