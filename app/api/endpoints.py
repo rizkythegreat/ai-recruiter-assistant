@@ -13,7 +13,11 @@ parser_service = ParserService()
 indexer_service = IndexerService()
 
 @router.post("/upload-cv")
-async def upload_cv(background_tasks: BackgroundTasks, files: List[UploadFile] = File(...)):
+async def upload_cv(
+    background_tasks: BackgroundTasks, 
+    files: List[UploadFile] = File(...),
+    user_id: str = Form("default_user")
+):
     """
     Endpoint: /upload-cv (POST)
     Accepts PDF/Docx files, parses them, and indexes their content.
@@ -25,14 +29,14 @@ async def upload_cv(background_tasks: BackgroundTasks, files: List[UploadFile] =
         temp_paths.append(path)
     
     # 2. Jalankan proses berat di background
-    background_tasks.add_task(process_and_index_cvs, temp_paths)
+    background_tasks.add_task(process_and_index_cvs, temp_paths, user_id)
     
     # 3. Langsung beri respon ke frontend agar tidak timeout
-    return {"message": "Files received. Indexing is processing in the background."}
+    return {"message": f"Files for user {user_id} received. Indexing is processing in the background."}
 
-async def process_and_index_cvs(file_paths: List[str]):
+async def process_and_index_cvs(file_paths: List[str], user_id: str):
         try:
-            documents = await parser_service.parse_docs(file_paths)
+            documents = await parser_service.parse_docs(file_paths, user_id=user_id)
             if documents:
                 await indexer_service.build_indices(documents)
                 load_index_into_memory()
@@ -42,7 +46,10 @@ async def process_and_index_cvs(file_paths: List[str]):
                     os.remove(path)
 
 @router.post("/analyze")
-async def analyze_cv(job_description: str = Form(...)):
+async def analyze_cv(
+    job_description: str = Form(...),
+    user_id: str = Form("default_user")
+):
     """
     Endpoint: /analyze (POST)
     Retreives relevant chunks using Hybrid RRF + Reranking and analyzes.
@@ -54,7 +61,7 @@ async def analyze_cv(job_description: str = Form(...)):
             # Fallback if not loaded
             vector_index = indexer_service.load_vector_index()
             
-        retriever = RetrieverService(vector_index)
+        retriever = RetrieverService(vector_index, user_id=user_id)
         
         # Perform Fusion Retrieval with Reranking
         relevant_nodes = await retriever.advanced_retrieve(job_description)
@@ -87,7 +94,8 @@ async def analyze_cv(job_description: str = Form(...)):
 @router.post("/rank-candidates")
 async def rank_candidates(
     job_title: str = Form(...),
-    job_description: str = Form(...)
+    job_description: str = Form(...),
+    user_id: str = Form("default_user")
 ):
     """
     Endpoint: /rank-candidates (POST)
@@ -98,7 +106,7 @@ async def rank_candidates(
         if not vector_index:
             vector_index = indexer_service.load_vector_index()
 
-        retriever = RetrieverService(vector_index)
+        retriever = RetrieverService(vector_index, user_id=user_id)
         
         # 1. Broad retrieval across multiple facets of the JD
         relevant_nodes = await retriever.query_fusion_retrive(job_description)
@@ -155,7 +163,8 @@ async def rank_candidates(
             indexer_service.save_rank_history(
                 job_title=job_title,
                 jd_text=job_description,
-                results=ranking
+                results=ranking,
+                user_id=user_id
             )
         
         return {"job_title": job_title, "ranking": ranking}
@@ -164,46 +173,46 @@ async def rank_candidates(
         raise HTTPException(status_code=500, detail=f"Ranking failed: {str(e)}")
 
 @router.get('/get-history')
-async def get_history():
+async def get_history(user_id: str = "default_user"):
     """
     Endpoint: /get-history (GET)
-    Mengambil daftar history ranking dari database.
+    Mengambil daftar history ranking dari database untuk user tertentu.
     """
     try:
-        history = indexer_service.get_rank_history()
+        history = indexer_service.get_rank_history(user_id=user_id)
         # Convert ObjectId ke string agar bisa di-serialize ke JSON
         for item in history:
             item["_id"] = str(item["_id"])
-        return {"history": history}
+        return {"history": history, "user_id": user_id}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/list-cv")
-async def list_cv():
+async def list_cv(user_id: str = "default_user"):
     """
     Endpoint: /list-cv (GET)
-    Mengambil daftar semua nama file CV yang sudah ada di database.
+    Mengambil daftar semua nama file CV yang sudah ada di database untuk user tertentu.
     """
     try:
-        files = indexer_service.list_indexed_files()
-        return {"files": files, "total": len(files)}
+        files = indexer_service.list_indexed_files(user_id=user_id)
+        return {"files": files, "total": len(files), "user_id": user_id}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/delete-cv/{filename}")
-async def delete_cv(filename: str):
+async def delete_cv(filename: str, user_id: str = "default_user"):
     """
     Endpoint: /delete-cv/{filename} (DELETE)
-    Menghapus data CV tertentu dari database.
+    Menghapus data CV tertentu dari database berdasarkan filename dan user_id.
     """
     try:
-        count = indexer_service.delete_by_filename(filename)
+        count = indexer_service.delete_by_filename(filename, user_id=user_id)
         if count == 0:
-            raise HTTPException(status_code=404, detail="File not found in database.")
+            raise HTTPException(status_code=404, detail=f"File {filename} not found for user {user_id}")
         
         # Reload RAM agar index terbaru sinkron
         load_index_into_memory()
         
-        return {"message": f"Successfully deleted {filename} and removed {count} chunks."}
+        return {"message": f"Successfully deleted {filename} for user {user_id} and removed {count} chunks."}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

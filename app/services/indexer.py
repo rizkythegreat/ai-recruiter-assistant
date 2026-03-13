@@ -46,14 +46,16 @@ class IndexerService:
         """
         return VectorStoreIndex.from_vector_store(vector_store=self.vector_store)
     
-    def list_indexed_files(self) -> List[str]:
+    def list_indexed_files(self, user_id: str = "default") -> List[dict]:
         """
-        Mengambil daftar nama file unik yang sudah terindeks di MongoDB.
+        Mengambil daftar nama file unik yang sudah terindeks di MongoDB untuk user tertentu.
         """
-        # Melakukan 'distinct' pada field metadata.file_name
         collection = self.mongo_client[self.db_name][self.collection_name]
 
         pipeline = [
+            {
+                "$match": {"metadata.user_id": user_id}
+            },
             {
                 "$group": {
                     "_id": "$metadata.file_name",
@@ -72,20 +74,24 @@ class IndexerService:
         ]
         return list(collection.aggregate(pipeline))
 
-    def delete_by_filename(self, filename: str):
+    def delete_by_filename(self, filename: str, user_id: str = "default"):
         """
-        Menghapus semua chunks dokumen yang memiliki file_name tertentu.
+        Menghapus semua chunks dokumen yang memiliki file_name dan user_id tertentu.
         """
         collection = self.mongo_client[self.db_name][self.collection_name]
-        result = collection.delete_many({"metadata.file_name": filename})
+        result = collection.delete_many({
+            "metadata.file_name": filename,
+            "metadata.user_id": user_id
+        })
         return result.deleted_count
 
-    def save_rank_history(self, job_title: str, jd_text: str, results: List[dict]):
+    def save_rank_history(self, job_title: str, jd_text: str, results: List[dict], user_id: str = "default"):
         """
         Menyimpan hasil ranking ke koleksi history terpisah.
         """
         history_coll = self.mongo_client[self.db_name]["rank_history"]
         log_entry = {
+            "user_id": user_id,
             "job_title": job_title,
             "job_description": jd_text,
             "results": results,
@@ -93,9 +99,9 @@ class IndexerService:
         }
         return history_coll.insert_one(log_entry).inserted_id
 
-    def get_rank_history(self) -> List[dict]:
+    def get_rank_history(self, user_id: str = "default") -> List[dict]:
         """
-        Mengambil semua history ranking dari database (terbaru dulu).
+        Mengambil semua history ranking dari database untuk user tertentu (terbaru dulu).
         """
         history_coll = self.mongo_client[self.db_name]["rank_history"]
-        return list(history_coll.find().sort("created_at", -1))
+        return list(history_coll.find({"user_id": user_id}).sort("created_at", -1))

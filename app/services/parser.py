@@ -19,12 +19,13 @@ class ParserService:
             verbose=os.getenv("DEBUG", "False").lower() == "true"
         )
     
-    async def parse_docs(self, file_paths: Union[str, List[str]]) -> List[Document]:
+    async def parse_docs(self, file_paths: Union[str, List[str]], user_id: str = "default") -> List[Document]:
         """
         Parses one or more documents into LlamaIndex Document objects.
         
         Args:
             file_paths (Union[str, List[str]]): Path or list of paths to process.
+            user_id (str): Unique identifier for the user or session.
             
         Returns:
             List[Document]: The parsed LlamaIndex documents.
@@ -46,6 +47,7 @@ class ParserService:
                 doc.metadata["file_name"] = os.path.basename(path)
                 doc.metadata["upload_date"] = current_time
                 doc.metadata["status"] = "indexed"
+                doc.metadata["user_id"] = user_id
                 all_documents.append(doc)
                 
         return all_documents

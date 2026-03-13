@@ -1,8 +1,9 @@
-from typing import List, Dict
+from typing import List, Dict, Optional
 from llama_index.core import VectorStoreIndex, QueryBundle
 from llama_index.core.retrievers import (
     VectorIndexRetriever
 )
+from llama_index.core.vector_stores.types import MetadataFilters, ExactMatchFilter
 from llama_index.retrievers.bm25 import BM25Retriever
 from llama_index.core.postprocessor import SentenceTransformerRerank
 from llama_index.core.schema import NodeWithScore
@@ -13,17 +14,30 @@ class RetrieverService:
     Combining semantic (Vector) and keyword-based (BM25) search with Reranking.
     """
     
-    def __init__(self, vector_index: VectorStoreIndex):
+    def __init__(self, vector_index: VectorStoreIndex, user_id: str = "default"):
         self.vector_index = vector_index
-        # Tingkatkan k agar mencakup lebih banyak kandidat agar ranking lebih akurat
-        self.vector_retriever = VectorIndexRetriever(index=self.vector_index, similarity_top_k=40)
+        self.user_id = user_id
         
-        # Initialize BM25 on the nodes of the vector index
-        nodes = list(self.vector_index.docstore.docs.values())
-        if nodes:
-            self.bm25_retriever = BM25Retriever.from_defaults(nodes=nodes, similarity_top_k=40)
+        # Metadata filtering to isolate results per user
+        self.filters = MetadataFilters(filters=[
+            ExactMatchFilter(key="user_id", value=self.user_id)
+        ])
+        
+        # Tingkatkan k agar mencakup lebih banyak kandidat agar ranking lebih akurat
+        self.vector_retriever = VectorIndexRetriever(
+            index=self.vector_index, 
+            similarity_top_k=40,
+            filters=self.filters
+        )
+        
+        # Initialize BM25 on the nodes of the vector index corresponding to the user
+        all_nodes = list(self.vector_index.docstore.docs.values())
+        user_nodes = [node for node in all_nodes if node.metadata.get("user_id") == self.user_id]
+        
+        if user_nodes:
+            self.bm25_retriever = BM25Retriever.from_defaults(nodes=user_nodes, similarity_top_k=40)
         else:
-            # Fallback if no nodes are available yet
+            # Fallback if no nodes are available yet for this user
             self.bm25_retriever = None
         
         # Cross-Encoder Reranker for objective "jury" scoring
