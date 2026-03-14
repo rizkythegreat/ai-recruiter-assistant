@@ -1,5 +1,5 @@
 import os
-from fastapi import APIRouter, UploadFile, File, HTTPException, Form, BackgroundTasks
+from fastapi import APIRouter, UploadFile, File, HTTPException, Form, BackgroundTasks, Depends
 from typing import List
 from llama_index.core import Settings
 from app.services.parser import ParserService
@@ -7,12 +7,14 @@ from app.services.indexer import IndexerService
 from app.services.retriever import RetrieverService
 from app.utils.helpers import clean_json_response, calculate_match_score
 from app.core.dependencies import get_vector_index, load_index_into_memory
+from fastapi_limiter.depends import RateLimiter
+from pyrate_limiter import Duration, Limiter, Rate
 
 router = APIRouter()
 parser_service = ParserService()
 indexer_service = IndexerService()
 
-@router.post("/upload-cv")
+@router.post("/upload-cv", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def upload_cv(
     background_tasks: BackgroundTasks, 
     files: List[UploadFile] = File(...),
@@ -45,7 +47,7 @@ async def process_and_index_cvs(file_paths: List[str], user_id: str):
                 if os.path.exists(path):
                     os.remove(path)
 
-@router.post("/analyze")
+@router.post("/analyze", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def analyze_cv(
     job_description: str = Form(...),
     user_id: str = Form("default_user")
@@ -91,7 +93,7 @@ async def analyze_cv(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Analysis failed: {str(e)}")
 
-@router.post("/rank-candidates")
+@router.post("/rank-candidates", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def rank_candidates(
     job_title: str = Form(...),
     job_description: str = Form(...),
@@ -172,7 +174,7 @@ async def rank_candidates(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ranking failed: {str(e)}")
 
-@router.get('/get-history')
+@router.get('/get-history', dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def get_history(user_id: str = "default_user"):
     """
     Endpoint: /get-history (GET)
@@ -187,7 +189,7 @@ async def get_history(user_id: str = "default_user"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/list-cv")
+@router.get("/list-cv", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def list_cv(user_id: str = "default_user"):
     """
     Endpoint: /list-cv (GET)
@@ -199,7 +201,7 @@ async def list_cv(user_id: str = "default_user"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete("/delete-cv/{filename}")
+@router.delete("/delete-cv/{filename}", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
 async def delete_cv(filename: str, user_id: str = "default_user"):
     """
     Endpoint: /delete-cv/{filename} (DELETE)

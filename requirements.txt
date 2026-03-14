@@ -24,3 +24,8 @@ llama-index-retrievers-bm25
 
 torch
 sentence-transformers
+
+# Rate Limiter
+aioredis
+pyrate_limiter
+fastapi_limiter
