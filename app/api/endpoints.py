@@ -174,7 +174,7 @@ async def rank_candidates(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ranking failed: {str(e)}")
 
-@router.get('/get-history', dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
+@router.get('/get-history', dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(10, Duration.SECOND * 60))))])
 async def get_history(user_id: str = "default_user"):
     """
     Endpoint: /get-history (GET)
@@ -189,7 +189,7 @@ async def get_history(user_id: str = "default_user"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/list-cv", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
+@router.get("/list-cv", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(10, Duration.SECOND * 60))))])
 async def list_cv(user_id: str = "default_user"):
     """
     Endpoint: /list-cv (GET)
