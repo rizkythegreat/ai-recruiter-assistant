@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import hashlib
 from typing import Dict, Any, List, Optional
 
 def clean_json_response(raw_response: str) -> Dict[str, Any]:
@@ -83,3 +84,13 @@ def load_preset_result(job_title: str, candidate_files: List[str]) -> Optional[d
     except Exception as e:
         print(f"Error loading preset: {e}")
         return None
+    
+def calculate_file_hash(file_path: str) -> str:
+    """
+    Generate SHA256 hash dari content file untuk deteksi duplikasi.
+    """
+    sha256_hash = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        for byte_block in iter(lambda: f.read(4096), b""):
+            sha256_hash.update(byte_block)
+    return sha256_hash.hexdigest()

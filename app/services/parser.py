@@ -4,6 +4,7 @@ from typing import List, Union
 from llama_parse import LlamaParse
 from llama_index.core import Document
 from app.core.config import Config
+from app.utils.helpers import calculate_file_hash
 
 class ParserService:
     """
@@ -40,6 +41,9 @@ class ParserService:
         
         all_documents = []
         for path in valid_paths:
+            # Generate hash sebelum parsing
+            content_hash = calculate_file_hash(path)
+
             # Parse satu file saja per panggilan agar kita yakin metadatanya benar
             docs = await self.parser.aload_data(path)
             current_time = datetime.now().isoformat()
@@ -48,6 +52,7 @@ class ParserService:
                 doc.metadata["upload_date"] = current_time
                 doc.metadata["status"] = "indexed"
                 doc.metadata["user_id"] = user_id
+                doc.metadata["content_hash"] = content_hash
                 all_documents.append(doc)
                 
         return all_documents

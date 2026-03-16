@@ -5,7 +5,7 @@ from llama_index.core import Settings
 from app.services.parser import ParserService
 from app.services.indexer import IndexerService
 from app.services.retriever import RetrieverService
-from app.utils.helpers import clean_json_response, calculate_match_score, load_preset_result
+from app.utils.helpers import clean_json_response, calculate_match_score, load_preset_result, calculate_file_hash
 from app.core.dependencies import get_vector_index, load_index_into_memory
 from fastapi_limiter.depends import RateLimiter
 from pyrate_limiter import Duration, Limiter, Rate
@@ -30,24 +30,47 @@ async def upload_cv(
     duplicates = []
     new_files = []
     temp_paths = []
+    cached_files = []
+
     for file in files:
         if file.filename in existing_filenames:
             duplicates.append(file.filename)
         else:
             new_files.append(file)
-    if new_files == [] and duplicates:
+    if not new_files and duplicates:
         raise HTTPException(
             status_code=409,
             detail={
                 "error": "Duplicate files detected",
                 "duplicates": duplicates,
-                "message": f"{len(duplicates)} file(s) already exist in database"
+                "message": f"{len(duplicates)} file(s) already exist"
             }
         )
+    
     for file in new_files:
         content = await file.read()
         path = parser_service.save_temp_file(content, file.filename)
-        temp_paths.append(path)
+        
+        # ✅ Calculate hash untuk cek cache
+        content_hash = calculate_file_hash(path)
+        
+        # ✅ Cek apakah embedding sudah ada di system
+        cached_embeddings = indexer_service.get_cached_embeddings(content_hash)
+        
+        if cached_embeddings:
+            # 🎯 REUSE EXISTING EMBEDDINGS (0 token!)
+            cloned_count = indexer_service.clone_embeddings_for_user(
+                content_hash=content_hash,
+                new_filename=file.filename,
+                new_user_id=user_id
+            )
+            cached_files.append(file.filename)
+            
+            # Hapus temp file karena tidak perlu parsing
+            os.remove(path)
+        else:
+            # ❌ Belum ada cache, perlu parsing & embedding
+            temp_paths.append(path)
 
     # 2. Jalankan proses berat di background
     if temp_paths:
@@ -61,6 +84,11 @@ async def upload_cv(
     if duplicates:
         response["warning"] = f"{len(duplicates)} duplicate(s) skipped"
         response["duplicates"] = duplicates
+    if cached_files:
+        response["cached_files"] = cached_files
+        response["info"] = f"{len(cached_files)} file(s) used cached embeddings (instant, 0 tokens)"
+    if cached_files:
+        load_index_into_memory()
     
     # 3. Langsung beri respon ke frontend agar tidak timeout
     return response

@@ -105,3 +105,48 @@ class IndexerService:
         """
         history_coll = self.mongo_client[self.db_name]["rank_history"]
         return list(history_coll.find({"user_id": user_id}).sort("created_at", -1))
+    
+    def get_cached_embeddings(self, content_hash: str):
+        """
+        Cek apakah embedding untuk file dengan hash tertentu sudah ada.
+        Return nodes jika ada, None jika tidak ada.
+        """
+        collection = self.mongo_client[self.db_name][self.collection_name]
+
+        cached_nodes = list(collection.find({"metadata.content_hash": content_hash}))
+
+        return cached_nodes if cached_nodes else None
+    
+    def clone_embeddings_for_user(
+        self,
+        content_hash: str,
+        new_filename: str,
+        new_user_id: str
+    ) -> int:
+        """
+        Duplicate embeddings yang sudah ada untuk user baru.
+        Hanya update metadata(user_id, file_name, upload_date).
+        Embedding vector tetap sama (hemat token).
+        """
+        collection = self.mongo_client[self.db_name][self.collection_name]
+        cached_nodes = list(collection.find({"metadata.content_hash": content_hash}))
+
+        if not cached_nodes:
+            return 0
+        
+        new_nodes = []
+        current_time = datetime.utcnow().isoformat()
+        for node in cached_nodes:
+            new_node = node.copy()
+            new_node.pop("_id", None)
+            new_node["metadata"]["user_id"] = new_user_id
+            new_node["metadata"]["file_name"] = new_filename
+            new_node["metadata"]["upload_date"] = current_time
+            new_node["metadata"]["cloned_from_cache"] = True
+
+            new_nodes.append(new_node)
+        if new_nodes:
+            result = collection.insert_many(new_nodes)
+            return len(result.inserted_ids)
+        
+        return 0
