@@ -1,0 +1,98 @@
+{
+    "job_title": "Data Scientist / ML Engineer",
+    "candidate_files": ["alex-wijaya.pdf", "budi-santoso.pdf", "rian-pratama.pdf", "dewi-lestari.pdf", "siti-aminah.pdf"],
+    "results": [
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 95,
+            "metadata": {
+                "years_of_experience": 4,
+                "top_skills": [
+                    "Python",
+                    "Machine Learning",
+                    "SQL",
+                    "Tableau"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Alex is the only candidate whose profile aligns perfectly with the Data Scientist requirements. He possesses the exact tech stack (Python, Scikit-Learn, TensorFlow, SQL, Tableau) and has direct experience in predictive modeling and industrial/e-commerce settings.",
+                "suitability_tag": "Highly Recommended"
+            },
+            "rank": 1
+        },
+        {
+            "candidate": "budi-santoso.pdf",
+            "score": 40,
+            "metadata": {
+                "years_of_experience": 7,
+                "top_skills": [
+                    "Go",
+                    "Python",
+                    "SQL",
+                    "AWS"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "While Budi has strong Python and SQL skills, his expertise is heavily focused on Backend Engineering and distributed systems rather than data science, modeling, or statistical analysis.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 2
+        },
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 15,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "JavaScript",
+                    "Java",
+                    "Node.js"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Rian is a recent graduate focused on full-stack web development. He lacks the specialized machine learning and data analysis skills required for the role.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "dewi-lestari.pdf",
+            "score": 10,
+            "metadata": {
+                "years_of_experience": 2,
+                "top_skills": [
+                    "Terraform",
+                    "AWS",
+                    "CI/CD"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Dewi is a DevOps Engineer with no relevant experience in data science, machine learning, or data analysis.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 10,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Siti is a Frontend Developer. Her skill set is entirely focused on UI/UX and web development, lacking the required data science and analytical background.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 5
+        }
+    ]
+}

@@ -1,0 +1,103 @@
+{
+    "job_title": "Senior Frontend Developer (React/Next.js)",
+    "candidate_files": [
+        "alex-wijaya.pdf",
+        "budi-santoso.pdf",
+        "rian-pratama.pdf",
+        "dewi-lestari.pdf",
+        "siti-aminah.pdf"
+    ],
+    "results": [
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 95,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "Tailwind CSS"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Perfect match for the JD. Meets all core requirements including React, Next.js, TypeScript, Tailwind, testing, and performance optimization. Has relevant experience in UI component libraries and animation.",
+                "suitability_tag": "Highly Recommended"
+            },
+            "rank": 1
+        },
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 40,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "JavaScript",
+                    "Node.js",
+                    "Java"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Entry-level candidate. Lacks the required 3+ years of professional experience and specific expertise in Next.js and Tailwind CSS.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 2
+        },
+        {
+            "candidate": "budi-santoso.pdf",
+            "score": 20,
+            "metadata": {
+                "years_of_experience": 7,
+                "top_skills": [
+                    "Go",
+                    "Python",
+                    "Kubernetes"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Strong senior engineer, but profile is entirely focused on Backend and Cloud/DevOps. Lacks the required Frontend stack (React/Next.js).",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "dewi-lestari.pdf",
+            "score": 10,
+            "metadata": {
+                "years_of_experience": 2,
+                "top_skills": [
+                    "Terraform",
+                    "AWS",
+                    "CI/CD"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Profile is strictly DevOps/Infrastructure. No relevant experience with Frontend development or the required tech stack.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 10,
+            "metadata": {
+                "years_of_experience": 4,
+                "top_skills": [
+                    "Python",
+                    "SQL",
+                    "Machine Learning"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Candidate is transitioning into Data Science. No relevant experience in Frontend development or the required web technologies.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 5
+        }
+    ]
+}

@@ -1,0 +1,107 @@
+{
+    "job_title": "Junior Full-Stack Developer",
+    "candidate_files": [
+        "alex-wijaya.pdf",
+        "budi-santoso.pdf",
+        "rian-pratama.pdf",
+        "dewi-lestari.pdf",
+        "siti-aminah.pdf"
+    ],
+    "results": [
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 95,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "JavaScript",
+                    "Node.js",
+                    "Express",
+                    "MongoDB",
+                    "Spring Boot"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Perfect alignment with the Junior Full-Stack Developer role. Possesses all core requirements (JS, Node, Express, DBs, Git) and hits the 'nice to have' criteria with Spring Boot and a strong academic background.",
+                "suitability_tag": "Highly Recommended"
+            },
+            "rank": 1
+        },
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 65,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "REST API"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Strong frontend expertise, but lacks the backend (Node.js/Express) experience required for a full-stack role. Overqualified for a junior position but a strong candidate if the team is willing to train on backend.",
+                "suitability_tag": "Medium Match"
+            },
+            "rank": 2
+        },
+        {
+            "candidate": "budi-santoso.pdf",
+            "score": 40,
+            "metadata": {
+                "years_of_experience": 7,
+                "top_skills": [
+                    "Go",
+                    "Python",
+                    "AWS",
+                    "Kubernetes"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Highly experienced Senior Backend Engineer. Significantly overqualified for a junior role and lacks the specific full-stack tech stack (Node.js/Express) requested.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "dewi-lestari.pdf",
+            "score": 20,
+            "metadata": {
+                "years_of_experience": 2,
+                "top_skills": [
+                    "Terraform",
+                    "AWS",
+                    "CI/CD",
+                    "Linux"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Profile is focused on DevOps and infrastructure, not software development. Does not meet the core requirements for web application development.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 15,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "Python",
+                    "SQL",
+                    "Machine Learning"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Transitioning candidate with a focus on Data Science. Lacks the necessary web development stack (JavaScript, Node.js, HTML/CSS) required for this role.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 5
+        }
+    ]
+}

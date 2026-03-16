@@ -1,0 +1,105 @@
+{
+    "job_title": "Senior Backend Engineer",
+    "candidate_files": [
+        "alex-wijaya.pdf",
+        "budi-santoso.pdf",
+        "rian-pratama.pdf",
+        "dewi-lestari.pdf",
+        "siti-aminah.pdf"
+    ],
+    "results": [
+        {
+            "candidate": "budi-santoso.pdf",
+            "score": 98,
+            "metadata": {
+                "years_of_experience": 7,
+                "top_skills": [
+                    "Go",
+                    "Python",
+                    "Kubernetes",
+                    "AWS",
+                    "PostgreSQL"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Perfect match. Exceeds experience requirements, possesses expert-level proficiency in required languages, holds relevant certifications, and has direct experience with microservices and distributed systems.",
+                "suitability_tag": "Highly Recommended"
+            },
+            "rank": 1
+        },
+        {
+            "candidate": "dewi-lestari.pdf",
+            "score": 45,
+            "metadata": {
+                "years_of_experience": 2,
+                "top_skills": [
+                    "Terraform",
+                    "AWS",
+                    "CI/CD",
+                    "Ansible"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Strong DevOps background, but lacks the backend development experience and programming language expertise (Go/Python) required for this role.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 2
+        },
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 30,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "Python",
+                    "SQL",
+                    "Machine Learning"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Transitioning candidate with no professional backend engineering experience. Skills are focused on Data Science rather than distributed systems architecture.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 25,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Specialized in Frontend development. Does not meet the backend engineering or distributed systems requirements.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 20,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "Node.js",
+                    "Java",
+                    "MongoDB"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Entry-level candidate. Lacks the 5+ years of professional experience and the specific language expertise (Go/Python) required for a Senior role.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 5
+        }
+    ]
+}

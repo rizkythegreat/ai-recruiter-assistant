@@ -5,7 +5,7 @@ from llama_index.core import Settings
 from app.services.parser import ParserService
 from app.services.indexer import IndexerService
 from app.services.retriever import RetrieverService
-from app.utils.helpers import clean_json_response, calculate_match_score
+from app.utils.helpers import clean_json_response, calculate_match_score, load_preset_result
 from app.core.dependencies import get_vector_index, load_index_into_memory
 from fastapi_limiter.depends import RateLimiter
 from pyrate_limiter import Duration, Limiter, Rate
@@ -104,6 +104,17 @@ async def rank_candidates(
     Uses Hybrid RRF + Query Fusion + Reranking to rank all uploaded candidates.
     """
     try:
+        available_files = indexer_service.list_indexed_files(user_id=user_id)
+        candidate_filenames = [f["file_name"] for f in available_files]
+
+        preset_result = load_preset_result(job_title, candidate_filenames)
+        if preset_result:
+            return {
+                "job_title": job_title,
+                "ranking": preset_result["results"],
+                "from_preset": True
+            }
+
         vector_index = get_vector_index()
         if not vector_index:
             vector_index = indexer_service.load_vector_index()

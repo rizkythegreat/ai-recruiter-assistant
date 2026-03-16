@@ -1,0 +1,106 @@
+{
+    "job_title": "DevOps / Cloud Infrastructure Engineer",
+    "candidate_files": [
+        "alex-wijaya.pdf",
+        "budi-santoso.pdf",
+        "rian-pratama.pdf",
+        "dewi-lestari.pdf",
+        "siti-aminah.pdf"
+    ],
+    "results": [
+        {
+            "candidate": "dewi-lestari.pdf",
+            "score": 95,
+            "metadata": {
+                "years_of_experience": 2,
+                "top_skills": [
+                    "Terraform",
+                    "Ansible",
+                    "AWS",
+                    "GCP",
+                    "Jenkins"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Perfect alignment with the JD. She possesses hands-on experience with all required IaC, CI/CD, and monitoring tools, plus relevant system administration background.",
+                "suitability_tag": "Highly Recommended"
+            },
+            "rank": 1
+        },
+        {
+            "candidate": "budi-santoso.pdf",
+            "score": 75,
+            "metadata": {
+                "years_of_experience": 7,
+                "top_skills": [
+                    "AWS",
+                    "Kubernetes",
+                    "Terraform",
+                    "Go",
+                    "CI/CD"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Strong cloud-native and infrastructure background. While his primary focus is Backend Engineering, his expertise in Kubernetes and AWS makes him a strong candidate for a DevOps role.",
+                "suitability_tag": "Medium Match"
+            },
+            "rank": 2
+        },
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 20,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript"
+                ],
+                "location": "Jakarta"
+            },
+            "analysis": {
+                "reason": "Candidate is a Frontend Developer with no relevant experience in infrastructure, IaC, or cloud operations.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 15,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "Node.js",
+                    "Java",
+                    "Spring Boot"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Recent graduate with a focus on full-stack development; lacks the required professional experience in DevOps tools and cloud infrastructure.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 10,
+            "metadata": {
+                "years_of_experience": 4,
+                "top_skills": [
+                    "Python",
+                    "SQL",
+                    "Machine Learning"
+                ],
+                "location": "Not specified"
+            },
+            "analysis": {
+                "reason": "Candidate is transitioning into Data Science and lacks the necessary DevOps, CI/CD, and infrastructure engineering experience.",
+                "suitability_tag": "Low Match"
+            },
+            "rank": 5
+        }
+    ]
+}
