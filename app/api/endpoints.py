@@ -166,6 +166,12 @@ async def rank_candidates(
 
         preset_result = load_preset_result(job_title, candidate_filenames)
         if preset_result:
+            indexer_service.save_rank_history(
+                job_title=job_title,
+                jd_text=job_description,
+                results=preset_result["results"],
+                user_id=user_id
+            )
             return {
                 "job_title": job_title,
                 "ranking": preset_result["results"],
