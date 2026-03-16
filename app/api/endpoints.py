@@ -24,17 +24,46 @@ async def upload_cv(
     Endpoint: /upload-cv (POST)
     Accepts PDF/Docx files, parses them, and indexes their content.
     """
+    existing_files = indexer_service.list_indexed_files(user_id=user_id)
+    existing_filenames = [f["file_name"] for f in existing_files]
+
+    duplicates = []
+    new_files = []
     temp_paths = []
     for file in files:
+        if file.filename in existing_filenames:
+            duplicates.append(file.filename)
+        else:
+            new_files.append(file)
+    if new_files == [] and duplicates:
+        raise HTTPException(
+            status_code=409,
+            detail={
+                "error": "Duplicate files detected",
+                "duplicates": duplicates,
+                "message": f"{len(duplicates)} file(s) already exist in database"
+            }
+        )
+    for file in new_files:
         content = await file.read()
         path = parser_service.save_temp_file(content, file.filename)
         temp_paths.append(path)
-    
+
     # 2. Jalankan proses berat di background
-    background_tasks.add_task(process_and_index_cvs, temp_paths, user_id)
+    if temp_paths:
+        background_tasks.add_task(process_and_index_cvs, temp_paths, user_id)
+    
+    response = {
+        "message": f"{len(new_files)} new file(s) received. Indexing in the background.",
+        "new_files": [f.filename for f in new_files],
+        "user_id": user_id
+    }
+    if duplicates:
+        response["warning"] = f"{len(duplicates)} duplicate(s) skipped"
+        response["duplicates"] = duplicates
     
     # 3. Langsung beri respon ke frontend agar tidak timeout
-    return {"message": f"Files for user {user_id} received. Indexing is processing in the background."}
+    return response
 
 async def process_and_index_cvs(file_paths: List[str], user_id: str):
         try:
@@ -212,7 +241,7 @@ async def list_cv(user_id: str = "default_user"):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@router.delete("/delete-cv/{filename}", dependencies=[Depends(RateLimiter(limiter=Limiter(Rate(5, Duration.SECOND * 60))))])
+@router.delete("/delete-cv/{filename}")
 async def delete_cv(filename: str, user_id: str = "default_user"):
     """
     Endpoint: /delete-cv/{filename} (DELETE)
