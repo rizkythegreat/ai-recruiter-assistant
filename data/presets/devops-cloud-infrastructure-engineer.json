@@ -12,7 +12,7 @@
             "candidate": "dewi-lestari.pdf",
             "score": 95,
             "metadata": {
-                "years_of_experience": 2,
+                "years_of_experience": 2.5,
                 "top_skills": [
                     "Terraform",
                     "Ansible",
@@ -22,31 +22,83 @@
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Direct alignment with all core requirements: IaC (Terraform/Ansible), CI/CD (Jenkins/GitLab), and Cloud (AWS/GCP).",
+                "Relevant experience in multi-region AWS infrastructure management.",
+                "Strong foundational background in system administration and on-premise infrastructure."
+            ],
+            "weaknesses": [
+                "Relatively junior level of experience compared to senior-level expectations.",
+                "Limited depth in large-scale enterprise architecture compared to a senior backend engineer."
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Perfect alignment with the JD. She possesses hands-on experience with all required IaC, CI/CD, and monitoring tools, plus relevant system administration background.",
-                "suitability_tag": "Highly Recommended"
+                "reason": "Dewi is the only candidate whose entire professional history is dedicated to the DevOps domain, matching every technical requirement listed in the JD.",
+                "suitability_tag": "Highly Recommended",
+                "recommendation": "Proceed to technical interview. Focus on deep-dive questions regarding her multi-region AWS deployment strategies and troubleshooting complex CI/CD pipeline failures."
             },
             "rank": 1
         },
         {
             "candidate": "budi-santoso.pdf",
-            "score": 75,
+            "score": 80,
             "metadata": {
                 "years_of_experience": 7,
                 "top_skills": [
-                    "AWS",
-                    "Kubernetes",
-                    "Terraform",
                     "Go",
-                    "CI/CD"
+                    "Kubernetes",
+                    "AWS",
+                    "Terraform"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong senior-level experience in scaling distributed systems and microservices.",
+                "Proven track record with Kubernetes and cloud-native architecture on AWS.",
+                "Relevant certifications (CKA, AWS Solutions Architect) demonstrate high technical competency."
+            ],
+            "weaknesses": [
+                "Primary background is Backend Engineering, not pure DevOps; may require a shift in mindset from application development to infrastructure automation.",
+                "Lacks explicit mention of Ansible or monitoring tools like Prometheus/Grafana in the summary."
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Strong cloud-native and infrastructure background. While his primary focus is Backend Engineering, his expertise in Kubernetes and AWS makes him a strong candidate for a DevOps role.",
-                "suitability_tag": "Medium Match"
+                "reason": "Budi is a strong candidate for a 'DevOps/SRE' hybrid role. While his background is backend-heavy, his experience with Kubernetes and AWS migrations makes him highly capable of handling infrastructure tasks.",
+                "suitability_tag": "Highly Recommended",
+                "recommendation": "Interview to assess his comfort level with infrastructure-specific tasks (Ansible, monitoring) versus application-level coding."
             },
             "rank": 2
+        },
+        {
+            "candidate": "rian-pratama.pdf",
+            "score": 30,
+            "metadata": {
+                "years_of_experience": 0,
+                "top_skills": [
+                    "Java",
+                    "Node.js",
+                    "Spring Boot",
+                    "Git"
+                ],
+                "location": "Not specified"
+            },
+            "strengths": [
+                "Strong academic foundation and high GPA.",
+                "Familiarity with version control and basic CI/CD concepts through academic projects."
+            ],
+            "weaknesses": [
+                "Lacks professional experience in DevOps, cloud infrastructure, or IaC tools.",
+                "Skill set is focused on full-stack development rather than infrastructure automation."
+            ],
+            "red_flags": [
+                "Significant gap between current skill set and the requirements for a DevOps Engineer role."
+            ],
+            "analysis": {
+                "reason": "Rian is a junior developer with no professional DevOps experience. He would require extensive training to meet the requirements.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Not suitable for this role. Keep in talent pool for junior developer positions."
+            },
+            "rank": 3
         },
         {
             "candidate": "siti-aminah.pdf",
@@ -60,33 +112,27 @@
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Strong experience in frontend performance optimization and migration.",
+                "Proven ability to lead projects and improve system metrics."
+            ],
+            "weaknesses": [
+                "Zero overlap with DevOps requirements (IaC, Cloud, Linux, Monitoring).",
+                "Career path is strictly Frontend/UI focused."
+            ],
+            "red_flags": [
+                "Complete misalignment with the job description."
+            ],
             "analysis": {
-                "reason": "Candidate is a Frontend Developer with no relevant experience in infrastructure, IaC, or cloud operations.",
-                "suitability_tag": "Low Match"
-            },
-            "rank": 3
-        },
-        {
-            "candidate": "rian-pratama.pdf",
-            "score": 15,
-            "metadata": {
-                "years_of_experience": 0,
-                "top_skills": [
-                    "Node.js",
-                    "Java",
-                    "Spring Boot"
-                ],
-                "location": "Not specified"
-            },
-            "analysis": {
-                "reason": "Recent graduate with a focus on full-stack development; lacks the required professional experience in DevOps tools and cloud infrastructure.",
-                "suitability_tag": "Low Match"
+                "reason": "Siti is a highly skilled Frontend Developer, but her profile does not contain any of the technical requirements for this DevOps role.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; consider for Frontend Engineering openings."
             },
             "rank": 4
         },
         {
             "candidate": "alex-wijaya.pdf",
-            "score": 10,
+            "score": 15,
             "metadata": {
                 "years_of_experience": 4,
                 "top_skills": [
@@ -96,9 +142,21 @@
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Analytical mindset and experience with data-driven problem solving.",
+                "Strong foundation in Python."
+            ],
+            "weaknesses": [
+                "Career pivot from Mechanical Engineering to Data Science; no experience in DevOps or Cloud Infrastructure.",
+                "Lacks knowledge of IaC, CI/CD, and Linux systems."
+            ],
+            "red_flags": [
+                "Candidate is currently transitioning into a completely different field (Data Science) that is unrelated to the DevOps role."
+            ],
             "analysis": {
-                "reason": "Candidate is transitioning into Data Science and lacks the necessary DevOps, CI/CD, and infrastructure engineering experience.",
-                "suitability_tag": "Low Match"
+                "reason": "Alex is currently pivoting into Data Science and lacks the necessary technical stack for a DevOps Engineer position.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role."
             },
             "rank": 5
         }

@@ -17,13 +17,26 @@
                     "React",
                     "Next.js",
                     "TypeScript",
-                    "Tailwind CSS"
+                    "Tailwind CSS",
+                    "Jest",
+                    "Cypress"
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Perfect alignment with core requirements: 3+ years of React/Next.js experience.",
+                "Proven track record in performance optimization (achieved 95+ Lighthouse score).",
+                "Experience with UI component libraries and design collaboration (Figma), matching 'nice to have' criteria.",
+                "Demonstrated ability to handle complex animations with Framer Motion."
+            ],
+            "weaknesses": [
+                "None significant; candidate meets or exceeds all primary and secondary requirements."
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Perfect match for the JD. Meets all core requirements including React, Next.js, TypeScript, Tailwind, testing, and performance optimization. Has relevant experience in UI component libraries and animation.",
-                "suitability_tag": "Highly Recommended"
+                "reason": "Siti is an ideal candidate who possesses the exact tech stack, performance optimization experience, and design collaboration skills requested.",
+                "suitability_tag": "Highly Recommended",
+                "recommendation": "Proceed to technical interview immediately. Focus on architectural decision-making in her migration project."
             },
             "rank": 1
         },
@@ -35,13 +48,27 @@
                 "top_skills": [
                     "JavaScript",
                     "Node.js",
-                    "Java"
+                    "Express",
+                    "MongoDB"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong academic background and foundational knowledge of JavaScript.",
+                "Demonstrated passion for full-stack development through projects."
+            ],
+            "weaknesses": [
+                "Lacks the required 3+ years of professional experience.",
+                "No professional experience with React, Next.js, or TypeScript.",
+                "Missing experience with professional testing frameworks like Jest or Cypress."
+            ],
+            "red_flags": [
+                "Significant gap in required technical stack and years of experience."
+            ],
             "analysis": {
-                "reason": "Entry-level candidate. Lacks the required 3+ years of professional experience and specific expertise in Next.js and Tailwind CSS.",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate is a junior developer and does not meet the senior/mid-level requirements for this role.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Keep in talent pool for potential junior/internship roles, but reject for this specific position."
             },
             "rank": 2
         },
@@ -53,31 +80,58 @@
                 "top_skills": [
                     "Go",
                     "Python",
+                    "AWS",
                     "Kubernetes"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong senior-level engineering experience in distributed systems.",
+                "Proven ability to lead migrations and optimize performance."
+            ],
+            "weaknesses": [
+                "Complete lack of frontend experience (React, Next.js, Tailwind).",
+                "Skill set is entirely focused on backend and infrastructure."
+            ],
+            "red_flags": [
+                "Total misalignment with the job description; candidate is a Backend/Cloud specialist."
+            ],
             "analysis": {
-                "reason": "Strong senior engineer, but profile is entirely focused on Backend and Cloud/DevOps. Lacks the required Frontend stack (React/Next.js).",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate is highly qualified but in a completely different domain (Backend/DevOps).",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; consider for backend engineering openings if available."
             },
             "rank": 3
         },
         {
             "candidate": "dewi-lestari.pdf",
-            "score": 10,
+            "score": 15,
             "metadata": {
                 "years_of_experience": 2,
                 "top_skills": [
                     "Terraform",
                     "AWS",
-                    "CI/CD"
+                    "CI/CD",
+                    "Jenkins"
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Strong focus on automation and infrastructure as code.",
+                "Experience with CI/CD pipelines."
+            ],
+            "weaknesses": [
+                "No frontend development experience.",
+                "Does not meet the 3+ years of experience requirement.",
+                "Skill set is strictly DevOps/Infrastructure."
+            ],
+            "red_flags": [
+                "Complete misalignment with the frontend-focused job description."
+            ],
             "analysis": {
-                "reason": "Profile is strictly DevOps/Infrastructure. No relevant experience with Frontend development or the required tech stack.",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate is a DevOps professional with no relevant frontend skills.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role."
             },
             "rank": 4
         },
@@ -93,9 +147,21 @@
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong analytical and problem-solving skills from engineering background."
+            ],
+            "weaknesses": [
+                "Career pivot into Data Science; lacks professional software development experience.",
+                "No experience with React, Next.js, or modern frontend frameworks.",
+                "Missing core frontend requirements (TypeScript, Tailwind, Testing)."
+            ],
+            "red_flags": [
+                "Candidate is transitioning into a different technical field (Data Science) and lacks the required frontend expertise."
+            ],
             "analysis": {
-                "reason": "Candidate is transitioning into Data Science. No relevant experience in Frontend development or the required web technologies.",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate is a career-changer into Data Science and does not possess the required frontend skills.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role."
             },
             "rank": 5
         }

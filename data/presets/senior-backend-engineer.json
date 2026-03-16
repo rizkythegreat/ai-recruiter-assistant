@@ -10,7 +10,7 @@
     "results": [
         {
             "candidate": "budi-santoso.pdf",
-            "score": 98,
+            "score": 95,
             "metadata": {
                 "years_of_experience": 7,
                 "top_skills": [
@@ -18,19 +18,30 @@
                     "Python",
                     "Kubernetes",
                     "AWS",
-                    "PostgreSQL"
+                    "Microservices"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Exceeds the 5+ years experience requirement with 7+ years in backend engineering.",
+                "Expert-level proficiency in Go and Python with proven production experience.",
+                "Strong cloud-native background with AWS and Kubernetes certifications (AWS CSA, CKA).",
+                "Direct experience with microservices architecture using gRPC and Kafka."
+            ],
+            "weaknesses": [
+                "None significant; profile is a near-perfect match for the JD."
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Perfect match. Exceeds experience requirements, possesses expert-level proficiency in required languages, holds relevant certifications, and has direct experience with microservices and distributed systems.",
-                "suitability_tag": "Highly Recommended"
+                "reason": "Budi is an ideal candidate who meets or exceeds every technical requirement and possesses relevant industry certifications.",
+                "suitability_tag": "Highly Recommended",
+                "recommendation": "Proceed to technical interview immediately. Focus on system design scenarios and scaling challenges."
             },
             "rank": 1
         },
         {
             "candidate": "dewi-lestari.pdf",
-            "score": 45,
+            "score": 40,
             "metadata": {
                 "years_of_experience": 2,
                 "top_skills": [
@@ -41,63 +52,119 @@
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Strong foundation in DevOps practices, CI/CD, and Infrastructure as Code.",
+                "Hands-on experience with AWS and multi-region infrastructure."
+            ],
+            "weaknesses": [
+                "Insufficient years of experience (approx. 2 years vs 5+ required).",
+                "Lacks core backend development experience (Go/Python) and database management expertise.",
+                "Profile is focused on infrastructure/DevOps rather than backend application development."
+            ],
+            "red_flags": [
+                "Significant misalignment with the core backend engineering requirements of the role."
+            ],
             "analysis": {
-                "reason": "Strong DevOps background, but lacks the backend development experience and programming language expertise (Go/Python) required for this role.",
-                "suitability_tag": "Low Match"
+                "reason": "Dewi is a strong DevOps candidate but lacks the backend development expertise required for this specific role.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Not suitable for this role. Keep in the talent pool for future DevOps/SRE openings."
             },
             "rank": 2
         },
         {
-            "candidate": "alex-wijaya.pdf",
-            "score": 30,
-            "metadata": {
-                "years_of_experience": 0,
-                "top_skills": [
-                    "Python",
-                    "SQL",
-                    "Machine Learning"
-                ],
-                "location": "Not specified"
-            },
-            "analysis": {
-                "reason": "Transitioning candidate with no professional backend engineering experience. Skills are focused on Data Science rather than distributed systems architecture.",
-                "suitability_tag": "Low Match"
-            },
-            "rank": 3
-        },
-        {
-            "candidate": "siti-aminah.pdf",
-            "score": 25,
-            "metadata": {
-                "years_of_experience": 3,
-                "top_skills": [
-                    "React",
-                    "Next.js",
-                    "TypeScript"
-                ],
-                "location": "Jakarta"
-            },
-            "analysis": {
-                "reason": "Specialized in Frontend development. Does not meet the backend engineering or distributed systems requirements.",
-                "suitability_tag": "Low Match"
-            },
-            "rank": 4
-        },
-        {
             "candidate": "rian-pratama.pdf",
-            "score": 20,
+            "score": 30,
             "metadata": {
                 "years_of_experience": 0,
                 "top_skills": [
                     "Node.js",
                     "Java",
+                    "Spring Boot",
                     "MongoDB"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong academic foundation and passion for full-stack development.",
+                "Familiarity with REST APIs and database schema design."
+            ],
+            "weaknesses": [
+                "Entry-level candidate; lacks the 5+ years of professional experience required.",
+                "Tech stack (Node.js/Java) does not align with the expert-level Go/Python requirement.",
+                "No professional experience with cloud platforms or containerization."
+            ],
+            "red_flags": [
+                "Significant gap in seniority and technical stack alignment."
+            ],
             "analysis": {
-                "reason": "Entry-level candidate. Lacks the 5+ years of professional experience and the specific language expertise (Go/Python) required for a Senior role.",
-                "suitability_tag": "Low Match"
+                "reason": "Rian is a promising junior developer but is not qualified for a Senior Backend Engineer position.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; consider for internship or junior developer programs if available."
+            },
+            "rank": 3
+        },
+        {
+            "candidate": "alex-wijaya.pdf",
+            "score": 25,
+            "metadata": {
+                "years_of_experience": 4,
+                "top_skills": [
+                    "Python",
+                    "SQL",
+                    "Machine Learning",
+                    "Data Analysis"
+                ],
+                "location": "Not specified"
+            },
+            "strengths": [
+                "Strong analytical mindset and proficiency in Python.",
+                "Experience with SQL and data-heavy projects."
+            ],
+            "weaknesses": [
+                "Career pivot from Mechanical Engineering to Data Science; lacks professional backend engineering experience.",
+                "No experience with microservices, cloud platforms (AWS/GCP), or containerization.",
+                "Total professional experience is below the 5-year threshold."
+            ],
+            "red_flags": [
+                "Candidate is transitioning into Data Science, not Backend Engineering.",
+                "Lack of production-grade software engineering experience."
+            ],
+            "analysis": {
+                "reason": "While the candidate has some Python skills, they lack the distributed systems and backend infrastructure experience required for a Senior role.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; candidate is better suited for entry-level Data Analyst or Junior Data Science roles."
+            },
+            "rank": 4
+        },
+        {
+            "candidate": "siti-aminah.pdf",
+            "score": 20,
+            "metadata": {
+                "years_of_experience": 3,
+                "top_skills": [
+                    "React",
+                    "Next.js",
+                    "TypeScript",
+                    "Tailwind CSS"
+                ],
+                "location": "Jakarta"
+            },
+            "strengths": [
+                "Strong expertise in modern frontend frameworks and UI/UX optimization.",
+                "Proven track record of improving web performance metrics."
+            ],
+            "weaknesses": [
+                "Role is for a Backend Engineer; candidate is a Frontend specialist.",
+                "Lacks experience with backend languages (Go/Python) and distributed systems.",
+                "Insufficient years of experience (3 years vs 5+ required)."
+            ],
+            "red_flags": [
+                "Complete misalignment with the technical stack and job function."
+            ],
+            "analysis": {
+                "reason": "Candidate is a highly skilled Frontend developer, but the role requires deep backend and distributed systems expertise.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; not a fit for backend engineering."
             },
             "rank": 5
         }

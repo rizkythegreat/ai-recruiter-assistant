@@ -22,9 +22,21 @@
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Perfect alignment with the tech stack (JavaScript, Node.js, Express, MongoDB, MySQL)",
+                "Demonstrated practical experience through full-stack academic projects",
+                "Nice-to-have skill (Spring Boot) already mastered",
+                "Strong academic background with high GPA (3.8/4.0)"
+            ],
+            "weaknesses": [
+                "Lack of professional industry experience",
+                "Limited exposure to large-scale production environments"
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Perfect alignment with the Junior Full-Stack Developer role. Possesses all core requirements (JS, Node, Express, DBs, Git) and hits the 'nice to have' criteria with Spring Boot and a strong academic background.",
-                "suitability_tag": "Highly Recommended"
+                "reason": "Rian is the only candidate who perfectly matches the Junior Full-Stack Developer requirements, including the nice-to-have Spring Boot skill.",
+                "suitability_tag": "Highly Recommended",
+                "recommendation": "Proceed to technical interview; focus on system design principles and handling production-level bugs."
             },
             "rank": 1
         },
@@ -41,9 +53,21 @@
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Strong professional experience in frontend development",
+                "Proven ability to improve performance metrics (Lighthouse scores)",
+                "Experience with REST API integration"
+            ],
+            "weaknesses": [
+                "Specialized in frontend; lacks backend experience with Node.js/Express",
+                "Overqualified for a junior role, potential retention risk",
+                "Missing database experience (MongoDB/MySQL)"
+            ],
+            "red_flags": [],
             "analysis": {
-                "reason": "Strong frontend expertise, but lacks the backend (Node.js/Express) experience required for a full-stack role. Overqualified for a junior position but a strong candidate if the team is willing to train on backend.",
-                "suitability_tag": "Medium Match"
+                "reason": "Strong candidate, but lacks the backend proficiency required for a full-stack role.",
+                "suitability_tag": "Medium Match",
+                "recommendation": "Consider for a Frontend-focused role if the team is willing to train her on backend technologies."
             },
             "rank": 2
         },
@@ -55,20 +79,33 @@
                 "top_skills": [
                     "Go",
                     "Python",
-                    "AWS",
-                    "Kubernetes"
+                    "Kubernetes",
+                    "AWS"
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Extensive experience in distributed systems and microservices",
+                "Strong background in database optimization and cloud architecture"
+            ],
+            "weaknesses": [
+                "Significant overqualification for a junior role",
+                "Tech stack (Go/Python) does not align with the requested Node.js/Express stack",
+                "Salary expectations likely exceed junior budget"
+            ],
+            "red_flags": [
+                "Misalignment of career level; likely to be bored or leave quickly"
+            ],
             "analysis": {
-                "reason": "Highly experienced Senior Backend Engineer. Significantly overqualified for a junior role and lacks the specific full-stack tech stack (Node.js/Express) requested.",
-                "suitability_tag": "Low Match"
+                "reason": "Highly skilled engineer, but a poor fit for a junior full-stack position.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Do not hire for this role; keep in talent pool for Senior Backend/Architect positions."
             },
             "rank": 3
         },
         {
             "candidate": "dewi-lestari.pdf",
-            "score": 20,
+            "score": 25,
             "metadata": {
                 "years_of_experience": 2,
                 "top_skills": [
@@ -79,17 +116,29 @@
                 ],
                 "location": "Jakarta"
             },
+            "strengths": [
+                "Solid understanding of infrastructure and deployment pipelines",
+                "Experience with cloud environments"
+            ],
+            "weaknesses": [
+                "Zero experience in application development (JavaScript/Node.js)",
+                "Career path is strictly DevOps/Infrastructure, not Full-Stack development"
+            ],
+            "red_flags": [
+                "Complete misalignment with the job description"
+            ],
             "analysis": {
-                "reason": "Profile is focused on DevOps and infrastructure, not software development. Does not meet the core requirements for web application development.",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate is a DevOps specialist with no relevant application development skills.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject for this role; not a fit for development tasks."
             },
             "rank": 4
         },
         {
             "candidate": "alex-wijaya.pdf",
-            "score": 15,
+            "score": 20,
             "metadata": {
-                "years_of_experience": 0,
+                "years_of_experience": 4,
                 "top_skills": [
                     "Python",
                     "SQL",
@@ -97,9 +146,22 @@
                 ],
                 "location": "Not specified"
             },
+            "strengths": [
+                "Strong analytical and problem-solving skills",
+                "Experience with SQL"
+            ],
+            "weaknesses": [
+                "Career pivot from Mechanical Engineering to Data Science; lacks software development experience",
+                "No experience with JavaScript, Node.js, or web frameworks",
+                "Training is focused on Data Science, not Full-Stack web development"
+            ],
+            "red_flags": [
+                "Candidate is pivoting into a field (Data Science) that is different from the job role (Full-Stack Dev)"
+            ],
             "analysis": {
-                "reason": "Transitioning candidate with a focus on Data Science. Lacks the necessary web development stack (JavaScript, Node.js, HTML/CSS) required for this role.",
-                "suitability_tag": "Low Match"
+                "reason": "Candidate lacks the core technical requirements for a web development role.",
+                "suitability_tag": "Low Match",
+                "recommendation": "Reject; candidate is pursuing a different career path."
             },
             "rank": 5
         }

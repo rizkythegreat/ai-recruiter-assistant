@@ -21,7 +21,7 @@ class IndexerService:
             mongodb_client=self.mongo_client,
             db_name=self.db_name,
             collection_name=self.collection_name,
-            index_name="vector_index"
+            vector_index_name="vector_index",
         )
         self.node_parser = SentenceSplitter(chunk_size=512, chunk_overlap=50)
 

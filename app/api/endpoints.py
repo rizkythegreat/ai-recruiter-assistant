@@ -208,8 +208,13 @@ async def rank_candidates(
         Candidates Data:
         {candidates_context}
 
-        Task: Rank candidates by suitability and extract metadata. 
-        Output REQUIREMENT: Return ONLY a valid JSON list of objects. No preamble. 
+        Task: Rank candidates by suitability with deep analysis of strengths and weaknesses.
+        For each candidate, analyze:
+        1. **Strengths**: What makes them suitable (specific skills, experience, achievements)
+        2. **Weaknesses & Gaps**: What's missing or concerning (e.g., career pivot, lack of specific tools, insufficient experience, career gaps, job hopping)
+        3. **Red Flags**: Career trajectory issues, unexplained gaps, or misalignment
+
+        Output REQUIREMENT: Return ONLY a valid JSON list. No preamble.
         Format per candidate:
         [
           {{
@@ -220,12 +225,27 @@ async def rank_candidates(
                 "top_skills": ["skill1", "skill2"],
                 "location": "string"
             }},
+            "strengths": [
+                "Specific strength 1 with evidence",
+                "Specific strength 2 with evidence"
+            ],
+            "weaknesses": [
+                "Specific weakness or gap 1",
+                "Specific weakness or gap 2"
+            ],
+            "red_flags": [
+                "Concern 1 if any (e.g., career pivot without related skills)",
+                "Concern 2 if any (e.g., lack of required certification)"
+            ],
             "analysis": {{
                 "reason": "Brief comparison",
-                "suitability_tag": "Highly Recommended/Medium Match/Low Match"
+                "suitability_tag": "Highly Recommended/Medium Match/Low Match",
+                "recommendation": "Specific hiring recommendation or interview focus"
             }}
           }}
         ]
+
+        Important: For career pivots like Alex Wijaya (from X to Data Science), explicitly mention the transition in weaknesses and assess transferable skills.
         """
 
         response = await Settings.llm.acomplete(prompt)
