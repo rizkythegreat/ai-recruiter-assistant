@@ -1,4 +1,17 @@
 from app.services.indexer import IndexerService
+from fastapi import Security, HTTPException, status
+from fastapi.security import APIKeyHeader
+from app.core.config import Config
+
+api_key_header = APIKeyHeader(name="X-API-KEY", auto_error=False)
+
+async def get_api_key(api_key: str = Security(api_key_header)):
+    if api_key == Config.API_KEY:
+        return api_key
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="Could not validate API Key"
+    )
 
 # Global variable agar index tetap di RAM selama aplikasi berjalan
 _global_vector_index = None

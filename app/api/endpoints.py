@@ -9,8 +9,11 @@ from app.utils.helpers import clean_json_response, calculate_match_score, load_p
 from app.core.dependencies import get_vector_index, load_index_into_memory
 from fastapi_limiter.depends import RateLimiter
 from pyrate_limiter import Duration, Limiter, Rate
+from app.core.dependencies import get_api_key
 
-router = APIRouter()
+router = APIRouter(
+    dependencies=[Depends(get_api_key)]
+)
 parser_service = ParserService()
 indexer_service = IndexerService()
 
